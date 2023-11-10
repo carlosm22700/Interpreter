@@ -1,4 +1,4 @@
-package java.com.craftinginterpreters.lox;
+package com.craftinginterpreters.lox;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 
 // static imports are considered bad style but this works for now
 
-import static java.com.craftinginterpreters.lox.TokenType.*;
+import static com.craftinginterpreters.lox.TokenType.*;
 
 //Scanner will make its way through the source code, adding token until it runs out of characters. 
 class Scanner {
