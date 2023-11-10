@@ -50,15 +50,54 @@ class Scanner {
             case '=': addToken(match('=') ? EQUAL_EQUAL : EQUAL); break;
             case '<': addToken(match('=') ? LESS_EQUAL: LESS); break;
             case '>': addToken(match('=') ? GREATER_EQUAL : GREATER); break;
+            case '/': if (match('/')) {
+                // A comment goes until the end of the line.
+                while (peek() != '\n' && !isAtEnd()) advance();
+            } else {
+                addToken(SLASH);
+            }
+            break;
+            case ' ':
+            case '\r':
+            case '\t':
+                //Ignore whitespace/
+                break;
+
+            case '\n':
+                line++;
+                break;
+
+            case '"': string(); break;
             
             default:
-            Lox.error(line, "Unexpected character.");
-            break;
+                if (isDigit(c)) {
+                    number();
+                } else {
+                    Lox.error(line, "Unexpected character.");
+                }
+                break;
+        }
+    }
+    
+    private void number() {
+        while (isDigit(peek())) advance();
+
+        // Look for fractional part.
+        if (peek() == '.' && isDigit(peekNext())) {
+            // Consume the "."
+            advance();
+
+            while (isDigit(peek())) advance();
         }
 
-
+        addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
+    }
+    
+    private boolean isDigit(char c) {
+        return c >= '0' && c <= '9';
     }
 
+    // using match(), we recognize these lexemes in two stages. It starts with ! and looks at next char to determine if != or only !
     private boolean match(char expected) {
         if (isAtEnd()) return false;
         if (source.charAt(current) != expected) return false;
@@ -66,6 +105,31 @@ class Scanner {
         current++;
         return true;
     }
+
+    private void string() {
+        while (peek() != '"' && !isAtEnd()) {
+            if (peek() == '\n') line++;
+            advance();
+        }
+
+        if (isAtEnd()) {
+            Lox.error(line, "Unterminated string.");
+            return;
+        }
+
+        // The closing "
+        advance();
+
+        // Trim the surrounding quotes.
+        String value = source.substring(start + 1, current - 1);
+        addToken(STRING, value);
+    }
+
+    //
+    private char peek() {
+        if (isAtEnd()) return '\0';
+        return source.charAt(current); 
+    }  
     
     // Helper function to tell us if we've consumed all of the characters
     private boolean isAtEnd() {
@@ -86,7 +150,6 @@ class Scanner {
     private void addToken(TokenType type, Object literal) {
         String text = source.substring(start, current);
         tokens.add(new Token(type, text, literal, line));
-        
     }
 }
 
