@@ -26,8 +26,8 @@ class Interpreter implements Expr.Visitor<Object> {
                 checkNumberOperands(expr.operator, left, right);
                 return (double)left > (double)right;
             case GREATER_EQUAL:
+            checkNumberOperands(expr.operator, left, right);
                 return (double)left >= (double)right;
-                checkNumberOperands(expr.operator, left, right);
             case LESS:
                 checkNumberOperands(expr.operator, left, right);
                 return (double)left < (double)right;
