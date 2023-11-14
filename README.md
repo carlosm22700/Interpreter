@@ -3,9 +3,9 @@ Interpreter for my programming language (wip)
 
 to run compile using the following command:
 
-javac com.craftinginterpreters.lox.Lox.java
+javac com/craftinginterpreters/lox/Lox.java 
 
-and then run:
+and then run REPL:
 
 java com.craftinginterpreters.lox.Lox
 
