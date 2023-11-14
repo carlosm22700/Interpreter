@@ -11,8 +11,22 @@ java com.craftinginterpreters.lox.Lox
 
 # Functionality
 
-code interpretation, global state management, function call and declaration, conditional branching, looping.
-
-Classes, methods, fields, this, and constructors
+tokens and lexing 
+abstract syntax trees,
+recursive descent parsing,
+prefix and infix expressions,
+runtime representation of objects,
+interpreting code using the Visitor pattern,
+lexical scope, 
+environment chains for storing variables, 
+control flow, 
+functions with parameters, 
+closures, 
+static variable resolution and error detection, 
+classes, 
+constructors, 
+fields, 
+methods,
+Inheritance.
 
 ## Syntax
