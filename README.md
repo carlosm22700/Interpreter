@@ -13,4 +13,6 @@ java com.craftinginterpreters.lox.Lox
 
 code interpretation, global state management, function call and declaration, conditional branching, looping.
 
+Classes, methods, fields, this, and constructors
+
 ## Syntax
