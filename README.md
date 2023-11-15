@@ -9,6 +9,8 @@ and then run REPL:
 
 java com.craftinginterpreters.lox.Lox
 
+WIP: c implementation of lox (clox)
+
 # Functionality
 
 tokens and lexing 
